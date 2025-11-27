@@ -36,7 +36,7 @@ df["Signal"] = 0
 df["Signal"] = np.where(df["MACD"] > df["Signal Line"], 1, 0)
 df["Position"] = df["Signal"].diff()
 
-# 3. Visualização
+# 3. Visualization
 plt.figure(figsize=(16,8))
 plt.title("S&P 500 Closing Prices & MACD")
 plt.grid(True)
@@ -50,6 +50,7 @@ plt.legend(loc='upper left')
 ax2 = plt.twinx() 
 ax2.plot(df.index, df["MACD"], label="MACD", color='blue', linewidth=1.5)
 ax2.plot(df.index, df["Signal Line"], label="Signal Line", color='red', linewidth=1.5)
+plt.legend(loc='lower left')
 
 #Histogram bars
 colors = ['green' if v >= 0 else 'red' for v in df['Histogram']]
@@ -65,4 +66,5 @@ ax2.plot(df[df["Position"] == -1].index,
          "v", markersize=12, color="r", label="Sell Signal")
 
 ax2.set_ylabel("MACD Momentum")
+
 plt.show()
